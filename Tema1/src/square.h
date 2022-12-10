@@ -1,38 +1,36 @@
-#pragma once
-
 #include <iostream>
-#include "shape.h"
+#include <string> 
 
-class Square :Shape
+using namespace std;
+
+class Square : Shape
 {
 public:
-	Square(const Square& square) :Shape(square), side_lenght(square.side_lenght) {}
-
-	Square(const std::string name, const float side_lenght) : Shape(name) 
+	// making sure that object is initialized before it will be used
+	// called also the constructor from base class so what all the members will be initialized
+	Square(const std::string name, const float side_lenght) : Shape(name)
 	{
 		this->side_lenght = side_lenght;
 	}
-
-	Square& operator=(const Square& square)
+	
+	Square(const Square& square) :Shape(square), side_lenght(square.side_lenght) 
 	{
-		if (this != &square)
-		{
-			Shape::operator=(square);
-			side_lenght = square.side_lenght;
-		}
-
-		return *this;
+		cout << "we are in square copy constructor\n";
 	}
 
-	void calculate_perimeter() override
+	float getSideLength()
 	{
-		this->perimeter = 4 * this->side_lenght;
+		return side_lenght;
 	}
 
-	float get_perimeter()
+	string getName()
 	{
-		return Shape::get_perimeter();
+		return name;
 	}
+
+private:
+	// dissalowed the use of assingment operator
+	Square& operator=(const Square& square);
 
 private:
 	float side_lenght;
