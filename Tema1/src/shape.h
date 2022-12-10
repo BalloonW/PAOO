@@ -1,40 +1,32 @@
-﻿#pragma once
-
 #include <iostream>
+#include <string> 
+using namespace std;
 
 class Shape
 {
-public: 
-	// copy constructor 
-	Shape(const Shape& shape) : name(shape.name), perimeter(shape.perimeter) {}
+public:
 	// normal constructor
-	Shape(const std::string name) 
+	Shape(const std::string name)
 	{
 		this->name = name;
 	}
 
-	// calculate perimeter
-	virtual void calculate_perimeter() {}
-
-	float get_perimeter()
+	// copy constructor 
+	Shape(const Shape& shape) : name(shape.name) 
 	{
-		return this->perimeter;
+		cout << "we are in shape copy constructor\n";
 	}
 
-	// copy assignment operator
-	Shape& operator=(const Shape& shape)
+	string getName()
 	{
-		// handling assignment to self
-		if (this != &shape)
-		{
-			name = shape.name;
-			perimeter = shape.perimeter;
-		}
-		return *this;
+		return name;
 	}
+
+private: 
+	// disallowing the use of "=" operator
+	Shape& operator=(const Shape&);
 
 protected:
-	std::string	name;
-	float perimeter;
+	string	name;
 };
 
